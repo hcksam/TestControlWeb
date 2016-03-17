@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-        String url = "http://www.baidu.com";
-        final String javaScript ="document.getElementById('index-kw').value = 'test';";
+//        String url = "http://www.baidu.com";
+        String url = "http://127.0.0.1:8888/TestHtml/testForm.html";
+        final String javaScript = jquerySearchScript();
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
@@ -32,6 +33,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         webView.loadUrl(url);
+    }
+
+    private String searchScript(){
+        String javaScript = "document.getElementById('index-kw').value = 'test';";
+        javaScript += "document.getElementById('index-form').submit();";
+        return javaScript;
+    }
+
+    private String jquerySearchScript(){
+        String javaScript = "$('#index-kw').val( 'test');";
+        javaScript += "$('#index-form').submit();";
+        return javaScript;
     }
 
     @Override
