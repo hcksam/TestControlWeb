@@ -22,12 +22,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-        String javaScript ="<script>document.getElementById(\"UHSearchBox\").value = \"test\";</script>";
+        String url = "http://www.baidu.com";
+        final String javaScript ="document.getElementById('index-kw').value = 'test';";
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://hk.yahoo.com");
-//        webView.loadDataWithBaseURL("http://hk.yahoo.com", javaScript, "text/html", "utf-8", "");
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                webView.loadUrl("javascript:(function() { " +
+                        javaScript +
+                        "})()");
+            }
+        });
+        webView.loadUrl(url);
     }
 
     @Override
