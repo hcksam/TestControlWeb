@@ -18,21 +18,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-        String url = "http://www.baidu.com";
-//        String url = "http://127.0.0.1:8888/TestHtml/testForm.html";
-        final String javaScript = jquerySearchScript();
+//        String url = "http://www.baidu.com";
+        String url = "http://ddns.toraou.com:8888/TestHtml/testForm.html";
+        final String javaScript = test();
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
+//        webView.loadDataWithBaseURL("file:///android_asset/", url, "text/html", "UTF-8", null);
         webView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public void onLoadResource(WebView view, String url){
+//                 view.loadUrl("<script src='//code.jquery.com/jquery-1.12.0.min.js'></script>");
+//            }
             @Override
-            public void onPageFinished(WebView view, String url)
-            {
-                webView.loadUrl("javascript:(function() { " +
+            public void onPageFinished(WebView view, String url) {
+//                view.loadUrl("<script src='//code.jquery.com/jquery-1.12.0.min.js'></script>");
+                view.loadUrl("javascript:(function() { " +
                         javaScript +
                         "})()");
             }
         });
         webView.loadUrl(url);
+    }
+
+    private String test(){
+        String javaScript = "";
+        javaScript += "$('body').append('test');";
+        return javaScript;
     }
 
     private String searchScript(){
