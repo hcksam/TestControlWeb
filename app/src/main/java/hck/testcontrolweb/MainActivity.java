@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-//        String url = "http://www.baidu.com";
-        String url = "http://127.0.0.1:8888/TestHtml/testForm.html";
+        String url = "http://www.baidu.com";
+//        String url = "http://127.0.0.1:8888/TestHtml/testForm.html";
         final String javaScript = jquerySearchScript();
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
